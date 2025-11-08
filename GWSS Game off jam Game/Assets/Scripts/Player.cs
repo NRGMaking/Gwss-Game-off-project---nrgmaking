@@ -35,7 +35,7 @@ public class Player : MonoBehaviour
     public void InputMovement()
     {
         //creating a variable for storage of our velocities prior to setting our real velocities to them
-        Vector2 idealMovement = new Vector2(0, rb.velocity.y);
+        Vector2 idealMovement = new Vector2(0, rb.linearVelocity.y);
 
         //getting player inpput and changing velocities according to them
         if (Input.GetKey(KeyCode.A))
@@ -50,10 +50,10 @@ public class Player : MonoBehaviour
         //if player is touching ground and jumping, jump
         if (Input.GetKey(KeyCode.Space) && groundCheck.grounded)
         {
-            rb.velocity = new Vector2(rb.velocity.x, jumpHeight);
+            rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpHeight);
         }
 
         //smoothly turning our real velocities into ideal velocities
-        rb.velocity = Vector2.Lerp(idealMovement, rb.velocity, Time.deltaTime * acceleration);
+        rb.linearVelocity = Vector2.Lerp(idealMovement, rb.linearVelocity, Time.deltaTime * acceleration);
     }
 }
